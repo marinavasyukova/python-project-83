@@ -17,8 +17,11 @@ uninstall:
 dev:
 	poetry run flask --app page_analyzer:app run
 
+updsetuptools:
+	pip install --upgrade pippip install --force-reinstall -U setuptools
+
 PORT ?= 8000
-start:
+start: updsetuptools
 	poetry run gunicorn -w 5 -b 0.0.0.0:$(PORT) page_analyzer:app
 
 setup: install build package-install
